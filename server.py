@@ -247,8 +247,8 @@ async def txt2img():
         elif failed_reason == '500':
             try:
                 failed_reason == ''
-                print(f"request error,trying agian in 10s ({retry_count})")
-                await asyncio.sleep(10)
+                print(f"request error,trying agian in 3s ({retry_count})")
+                await asyncio.sleep(3)
                 b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
                 if b64_str == "rate_limit":
                     retry_count = retry_count + 1
