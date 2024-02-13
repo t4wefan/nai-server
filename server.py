@@ -146,7 +146,7 @@ connection_count = 0
 
 @app.route('/sdapi/v1/txt2img', methods=['POST'])
 async def txt2img():
-
+    time.sleep(1)
     # 获取请求的 JSON 数据
     request_json = request.get_json()
 
