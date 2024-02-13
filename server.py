@@ -1,7 +1,7 @@
 print("initializing")
 
 import asyncio,pathlib,uuid
-from flask import Flask, request, jsonify
+from quart import Quart, request
 from loguru import logger
 from os import environ as env
 from api import API
@@ -142,7 +142,7 @@ async def generate(sample_prompt,preset_str,uc_str):
                 return ''
     
 
-app = Flask(__name__)
+app = Quart(__name__)
 
 connection_count = 0 
 
@@ -165,7 +165,7 @@ async def txt2img():
 
     # 如果请求中没有 JSON 数据，返回错误响应
     if request_json is None:
-        return jsonify({"error": "No JSON data provided"}), 400
+        return {"error": "No JSON data provided"}, 400
 
     # 将 JSON 数据转换为字典
     data_dict = dict(request_json)
@@ -332,7 +332,7 @@ async def txt2img():
     last_request = time.time()
     
     # preset.negative_prompt = "weibo_username" 
-    return jsonify(return_data)
+    return return_data
 
     
     

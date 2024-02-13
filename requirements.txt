@@ -1,7 +1,7 @@
 novelai_api
 aiohttp
-flask[async]
-# quart
+# flask[async]
+quart
 asyncio
 loguru
 python-dotenv
