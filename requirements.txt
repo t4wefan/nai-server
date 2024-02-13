@@ -1,0 +1,7 @@
+novelai_api
+aiohttp
+flask[async]
+# quart
+asyncio
+loguru
+python-dotenv
