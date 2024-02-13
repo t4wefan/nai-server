@@ -66,9 +66,7 @@ api_inst = API()
 
 
 async def generate(sample_prompt,preset_str,uc_str):
-    
 
-    
     preset = ImagePreset()
     # global preset
     
@@ -130,7 +128,7 @@ async def generate(sample_prompt,preset_str,uc_str):
         except Exception as e:
             print(f"发生错误: {e}")
             global connection_count
-            connection_count = connection_count - 1
+            # connection_count = connection_count - 1
             logger.error(f"generation failed")
             if "Reached the rate limits for free Opus image generations" in str(e):
                 return "rate_limit"
@@ -148,6 +146,15 @@ connection_count = 0
 
 @app.route('/sdapi/v1/txt2img', methods=['POST'])
 async def txt2img():
+    global connection_count 
+    
+    while True:
+        if connection_count > 0 :
+            #print(f"waiting {connection_count} generation......")
+            await asyncio.sleep(3)
+        else :
+
+            break
     
     # global last_request
     
@@ -183,18 +190,7 @@ async def txt2img():
         n_prompt = ''
         
     uc_str = n_prompt + "weibo_username" 
-    
-        
-    global connection_count 
-    async def wait_for_connection():
-        while True:
-            if connection_count > 0 :
-                #print(f"waiting {connection_count} generation......")
-                await asyncio.sleep(3)
-            else :
 
-                break
-    await wait_for_connection()
     connection_count = connection_count + 1
     print(data_dict)
     
