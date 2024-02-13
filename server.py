@@ -190,7 +190,7 @@ async def txt2img():
         while True:
             if connection_count > 0 :
                 #print(f"waiting {connection_count} generation......")
-                time.sleep(3)
+                asyncio.sleep(3)
             else :
 
                 break
@@ -252,7 +252,7 @@ async def txt2img():
             try:
                 failed_reason == ''
                 print(f"request error,trying agian in 10s ({retry_count})")
-                time.sleep(10)
+                asyncio.sleep(10)
                 b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
                 if b64_str == "rate_limit":
                     retry_count = retry_count + 1
@@ -278,7 +278,7 @@ async def txt2img():
             try:
                 failed_reason == ''
                 print(f"request error,trying agian in 16s ({retry_count})")
-                time.sleep(16)
+                asyncio.sleep(16)
                 b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
                 if b64_str == "rate_limit":
                     retry_count = retry_count + 1
@@ -303,7 +303,7 @@ async def txt2img():
         else:
             try:
                 print(f"request error,trying agian in 8s ({retry_count})")
-                time.sleep(8)
+                asyncio.sleep(8)
                 b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
                 if b64_str == "rate_limit":
                     failed_reason = "rate_limit"
