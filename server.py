@@ -1,7 +1,7 @@
 print("initializing")
 
 import asyncio,pathlib,uuid
-from quart import Quart, request,jsonify
+from flask import Flask, request,jsonify
 from loguru import logger
 from os import environ as env
 from api import API
@@ -142,26 +142,26 @@ async def generate(sample_prompt,preset_str,uc_str):
                 return ''
     
 
-app = Quart(__name__)
+app = Flask(__name__)
 
 connection_count = 0 
 
 @app.route('/sdapi/v1/txt2img', methods=['POST'])
 async def txt2img():
     
-    global last_request
+    # global last_request
     
-    if last_request == None:
-        last_request = time.time()
+    # if last_request == None:
+    #     last_request = time.time()
     
-    time_diff = time.time() - last_request
-    if time_diff < 3:
-        print(f"sleeping for {time_diff}")
-        time.sleep(time_diff)
+    # time_diff = time.time() - last_request
+    # if time_diff < 3:
+    #     print(f"sleeping for {time_diff}")
+    #     time.sleep(time_diff)
     
     # time.sleep(1)
     # 获取请求的 JSON 数据
-    request_json = await request.get_json()
+    request_json = request.get_json()
 
     # 如果请求中没有 JSON 数据，返回错误响应
     if request_json is None:
