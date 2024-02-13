@@ -17,6 +17,8 @@ import random
 request_count = 0
 fallback_count = 0
 
+last_request = None
+
 # 使用的库 https://github.com/Aedial/novelai-api
 
 
@@ -146,7 +148,12 @@ connection_count = 0
 
 @app.route('/sdapi/v1/txt2img', methods=['POST'])
 async def txt2img():
-    time.sleep(1)
+    time_diff = time.time() - last_request
+    if time_diff < 3:
+        print(f"sleeping for {time_diff}")
+        time.sleep(time_diff)
+    
+    # time.sleep(1)
     # 获取请求的 JSON 数据
     request_json = request.get_json()
 
@@ -314,6 +321,9 @@ async def txt2img():
 
     connection_count = connection_count -1
     return_data = {"images":[b64_str],"info":{"prompt":''}}
+    
+    global last_request
+    last_request = time.time()
     
     # preset.negative_prompt = "weibo_username" 
     return jsonify(return_data)
