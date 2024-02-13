@@ -151,6 +151,9 @@ async def txt2img():
     
     global last_request
     
+    if last_request == None:
+        last_request = time.time()
+    
     time_diff = time.time() - last_request
     if time_diff < 3:
         print(f"sleeping for {time_diff}")
