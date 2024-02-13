@@ -161,14 +161,14 @@ async def txt2img():
     
     # time.sleep(1)
     # 获取请求的 JSON 数据
-    request_json = request.get_json()
+    request_json = await request.get_json()
 
     # 如果请求中没有 JSON 数据，返回错误响应
     if request_json is None:
         return jsonify({"error": "No JSON data provided"}), 400
 
     # 将 JSON 数据转换为字典
-    data_dict = dict(request_json)
+    data_dict = request_json
     
     # 这里可以对字典进行进一步处理
     sample_prompt = data_dict["prompt"]
