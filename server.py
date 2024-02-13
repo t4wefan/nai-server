@@ -215,22 +215,25 @@ async def txt2img():
         failed_reason = 'private_generation'
     
     retry_count = 0 
-    max_retry_count = 3
+    max_retry_count = 5
     
     while b64_str == '':
-        if retry_count >= max_retry_count or failed_reason == "rate_limit" or failed_reason == '':
-            print(f"request error,trying fallback ({retry_count})")
-            from fallback import async_get_sd_image
-            json_sd = await async_get_sd_image(prompt=sample_prompt,negative_prompt=n_prompt)
-            connection_count = connection_count - 1
-            return jsonify(json_sd)
-        
-        elif failed_reason == "private_generation":
+        # if retry_count >= max_retry_count or failed_reason == "rate_limit" or failed_reason == '':
             # print(f"request error,trying fallback ({retry_count})")
-            from fallback import async_get_private_image
-            json_sd = await async_get_private_image(prompt=sample_prompt,negative_prompt=n_prompt)
-            connection_count = connection_count - 1
-            return jsonify(json_sd)
+            # from fallback import async_get_sd_image
+            # json_sd = await async_get_sd_image(prompt=sample_prompt,negative_prompt=n_prompt)
+            # connection_count = connection_count - 1
+            # return jsonify(json_sd)
+        
+        # elif failed_reason == "private_generation":
+        #     # print(f"request error,trying fallback ({retry_count})")
+        #     from fallback import async_get_private_image
+        #     json_sd = await async_get_private_image(prompt=sample_prompt,negative_prompt=n_prompt)
+        #     connection_count = connection_count - 1
+        #     return jsonify(json_sd)
+        
+        if retry_count >= max_retry_count:
+            b64_str = ''
 
         elif failed_reason == '500':
             try:
