@@ -215,7 +215,7 @@ async def txt2img():
         failed_reason = 'private_generation'
     
     retry_count = 0 
-    max_retry_count = 5
+    max_retry_count = 3
     
     while b64_str == '':
         # if retry_count >= max_retry_count or failed_reason == "rate_limit" or failed_reason == '':
@@ -238,8 +238,8 @@ async def txt2img():
         elif failed_reason == '500':
             try:
                 failed_reason == ''
-                print(f"request error,trying agian in 3s ({retry_count})")
-                time.sleep(3)
+                print(f"request error,trying agian in 10s ({retry_count})")
+                time.sleep(10)
                 b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
                 if b64_str == "rate_limit":
                     retry_count = retry_count + 1
