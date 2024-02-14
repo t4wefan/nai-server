@@ -205,7 +205,12 @@ async def txt2img():
         b64_str = ''
     
     else:
-        b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
+        try:
+            b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
+        except Exception:
+            print(Exception)
+            b64_str = ''
+            failed_reason = ''
         
     if b64_str == "rate_limit":
         failed_reason = "rate_limit"
