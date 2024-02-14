@@ -61,12 +61,12 @@ print("starting server")
 
 #             break
 
-api_inst = API()
+
 # api_inst.api.proxy = nai_proxy
 
 
 async def generate(sample_prompt,preset_str,uc_str):
-
+    api_inst = API()
     preset = ImagePreset()
     # global preset
     
@@ -206,6 +206,7 @@ async def txt2img():
     
     else:
         try:
+            # api_inst = API()
             b64_str = await generate(sample_prompt=sample_prompt,preset_str=preset_str,uc_str=uc_str)
         except Exception:
             print(Exception)
