@@ -53,7 +53,7 @@ def forward():
             post_data['prompt'] =  preset['prompt'] + data['prompt']
 
         if 'negative_prompt' in data and 'negative_prompt' in preset:
-            post_data['negative_prompt'] += ', ' + preset['negative_prompt']
+            post_data['negative_prompt'] = + preset['negative_prompt']
 
         print('--------- START OF REQUEST DATA ---------')
         print(json.dumps(post_data, indent=4))
