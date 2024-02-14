@@ -195,9 +195,9 @@ async def txt2img():
     print(data_dict)
     
     if "enable_hr" in data_dict:
-        print("Source: outsider request")
+        print("\033[33mSource: outsider request \033[0m")
     else:
-        print("Source: insider request")
+        print("\033[32mSource: insider request \033[0m")
     
     from fallback import check_private
     
