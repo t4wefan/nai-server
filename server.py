@@ -250,7 +250,7 @@ async def txt2img():
         if retry_count >= max_retry_count:
             b64_str = ''
             connection_count = connection_count - 1
-            return 500
+            return "failed"
 
         elif failed_reason == '500':
             try:
