@@ -76,7 +76,7 @@ async def generate(sample_prompt,preset_str,uc_str):
     
     random_res = random.choice([1152,1216])
     
-    from fallback import check_potrait
+    from fallback import check_potrait,check_square
     
     # if check_private(input_str=sample_prompt):
     #     # return_data = await async_get_private_image(prompt=sample_prompt,negative_prompt=uc_str)
@@ -86,10 +86,14 @@ async def generate(sample_prompt,preset_str,uc_str):
         preset.resolution = (832, random_res)
         print("Size: potrait")
     else:
-        preset.resolution = (random_res, 832)
-        print("Size: landscape")
-        from fallback import process_string
-        sample_prompt = process_string(input_str=sample_prompt,remove_list=['landscape',])
+        if check_square(input_str=sample_prompt):
+            preset.resolution = (1024,1024)
+            print("Size: square")
+        else:
+            preset.resolution = (random_res, 832)
+            print("Size: landscape")
+            from fallback import process_string
+            sample_prompt = process_string(input_str=sample_prompt,remove_list=['landscape',])
     
         
     preset.uc_preset = UCPreset.Preset_Heavy 
@@ -197,7 +201,7 @@ async def txt2img():
     if "enable_hr" in data_dict:
         print("\033[33mSource: outsider request \033[0m")
     else:
-        print("\033[34mSource: insider request \033[0m")
+        print("\033[32mSource: insider request \033[0m")
     
     from fallback import check_private
     

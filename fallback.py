@@ -34,11 +34,27 @@ def check_potrait(input_str):
     # 移除在remove_list中出现的元素
     new_list = split_list
     for i in new_list:
-        if "landscape" in i:
+        if "landscape" in i or "square" in i:
             return False
         else:
             new_list = new_list
     return True
+
+def check_square(input_str):
+    # 将中文逗号替换为英文逗号
+    input_str = input_str.replace('，', ',')
+    
+    # 根据英文逗号拆分字符串
+    split_list = input_str.split(',')
+        
+    # 移除在remove_list中出现的元素
+    new_list = split_list
+    for i in new_list:
+        if  "square" in i and "landscape" not in i:
+            return True
+        else:
+            new_list = new_list
+    return False
 
 def check_private(input_str):
     # 将中文逗号替换为英文逗号
