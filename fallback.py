@@ -147,4 +147,4 @@ def async_get_private_image(prompt,negative_prompt):
     result = loop.run_in_executor(None, get_private_image, prompt,negative_prompt)
     return result
 
-
+ver = 111
