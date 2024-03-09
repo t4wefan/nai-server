@@ -100,6 +100,7 @@ async def generate(sample_prompt,preset_str,uc_str):
     preset.quality_toggle = True
     preset.smea = True
     preset.uc = uc_str
+    preset.seed = random.randint(11111111,99999999)
     # preset.sampler = ImageSampler.k_euler
 
     
