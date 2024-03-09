@@ -101,8 +101,8 @@ async def generate(sample_prompt,preset_str,uc_str):
     preset.smea = True
     preset.uc = uc_str
     preset.seed = random.randint(11111111,99999999)
-    preset.sampler = ImageSampler.k_euler
-    preset.decrisper = ""
+    # preset.sampler = ImageSampler.k_euler
+    # preset.decrisper = ""
     # preset.sampler = ImageSampler.k_euler
 
     
