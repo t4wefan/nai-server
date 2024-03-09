@@ -1,4 +1,4 @@
-novelai_api
+novelai-api==0.23.1
 aiohttp
 flask[async]
 # quart
