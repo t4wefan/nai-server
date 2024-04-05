@@ -62,6 +62,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   #   f.write(data)
     
   b64_str = base64.b64encode(data)
+  b64_str = b64_str.decode('utf-8')
   
   return {"images":[b64_str]}
 
@@ -121,6 +122,7 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
   #   f.write(data)
     
   b64_str = base64.b64encode(data)
+  b64_str = b64_str.decode('utf-8')
   
   return {"images":[b64_str]}
 
