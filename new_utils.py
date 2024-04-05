@@ -14,7 +14,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   api = API()
   
   headers = {'Authorization': f'Bearer {sync_login()}' }
-  print(headers)
+  # print(headers)
   
   seed:int = random.randint(11111111,99999999)
   
