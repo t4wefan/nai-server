@@ -48,10 +48,16 @@ def txt2img():
         lock.release()
         
     except:
-        return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=[832,1216])
-        lock.release()
+        try:
+            return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=[832,1216])
+            lock.release()
+        except:
+            lock.release()
+            is_error = True
         
     finally:
+        if is_error:
+            return "error",500
         logger.success("request finished")
         print("")
         return return_data
