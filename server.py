@@ -121,9 +121,9 @@ async def generate(sample_prompt,preset_str,uc_str):
         
             
         logger.info(f"satrting generation")
-        from new_utils import generate_image
+        from new_utils import async_generate_image
         try:
-            res_data = generate_image(prompt=prompt,negative_prompt=uc_str,resolution=preset.resolution)
+            res_data = await async_generate_image(prompt=prompt,negative_prompt=uc_str,resolution=preset.resolution)
             b64_str = res_data["images"][0]
             return b64_str
             
