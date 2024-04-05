@@ -55,7 +55,7 @@ class API:
 
         self.api = NovelAIAPI(logger=self.logger)
         
-        self.api.BASE_ADDRESS = "http://192.168.1.85:5000"
+        # self.api.BASE_ADDRESS = "http://192.168.1.85:5000"
 
     @property
     def encryption_key(self):
