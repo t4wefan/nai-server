@@ -17,6 +17,9 @@ import random
 request_count = 0
 fallback_count = 0
 
+
+
+
 last_request = None
 
 # 使用的库 https://github.com/Aedial/novelai-api
@@ -66,7 +69,7 @@ print("starting server")
 
 
 async def generate(sample_prompt,preset_str,uc_str):
-    api_inst = API()
+    api_inst = API(base_address="https://image.novelai.net")
     preset = ImagePreset()
     # global preset
     
