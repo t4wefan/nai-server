@@ -70,7 +70,9 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
   
   api = API()
   
-  headers = {'Authorization': f'Bearer {await login()}' }
+  token = await login()
+  
+  headers = {'Authorization': f'Bearer {token}' }
   print(headers)
   
   seed:int = random.randint(11111111,99999999)
