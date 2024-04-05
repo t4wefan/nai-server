@@ -46,6 +46,7 @@ def txt2img():
         # api_inst = API()
         return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=[832,1216])
         lock.release()
+        is_error = False
         
     except:
         try:
