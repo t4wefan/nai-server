@@ -9,6 +9,8 @@ from aiohttp import ClientSession
 from novelai_api import NovelAIAPI
 from novelai_api.utils import get_encryption_key
 
+import asyncio
+
 
 
 class API:
@@ -52,8 +54,8 @@ class API:
         self.logger.addHandler(StreamHandler())
 
         self.api = NovelAIAPI(logger=self.logger)
-        if base_address is not None:
-            self.api.BASE_ADDRESS = base_address
+        
+        self.api.BASE_ADDRESS = "http://192.168.1.85:5000"
 
     @property
     def encryption_key(self):
@@ -90,3 +92,16 @@ def dumps(e: Any) -> str:
     """
 
     return json.dumps(e, indent=4, ensure_ascii=False, cls=JSONEncoder)
+
+
+async def login():
+    api = API()
+    return await api.api.high_level.login(api._username, api._password)
+
+def sync_login():
+    return asyncio.run(login())
+
+
+if __name__ == "__main__":
+    
+    print(sync_login())

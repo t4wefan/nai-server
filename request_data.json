@@ -1,0 +1,27 @@
+{
+    "input": "1girl, best quality, amazing quality, very aesthetic, absurdres",
+    "model": "nai-diffusion-3",
+    "action": "generate",
+    "parameters": {
+      "legacy": false,
+      "n_samples": 1,
+      "steps": 28,
+      "scale": 6.5,
+      "uncond_scale": 1.0,
+      "controlnet_strength": 1.0,
+      "add_original_image": false,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "native",
+      "width": 832,
+      "height": 1216,
+      "seed": 92598728,
+      "extra_noise_seed": 92598728,
+      "negative_prompt": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], weibo_username",
+      "sampler": "k_euler",
+      "sm": true,
+      "sm_dyn": false,
+      "dynamic_thresholding": true,
+      "qualityToggle": true,
+      "ucPreset": 4
+    }
+  }

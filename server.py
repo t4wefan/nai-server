@@ -69,7 +69,7 @@ print("starting server")
 
 
 async def generate(sample_prompt,preset_str,uc_str):
-    api_inst = API(base_address="https://image.novelai.net")
+    api_inst = API()
     preset = ImagePreset()
     # global preset
     
@@ -104,8 +104,8 @@ async def generate(sample_prompt,preset_str,uc_str):
     preset.smea = True
     preset.uc = uc_str
     preset.seed = random.randint(11111111,99999999)
-    # preset.sampler = ImageSampler.k_euler
-    # preset.decrisper = ""
+    preset.sampler = ImageSampler.k_euler
+    preset.decrisper = True
     # preset.sampler = ImageSampler.k_euler
 
     
@@ -121,17 +121,11 @@ async def generate(sample_prompt,preset_str,uc_str):
         
             
         logger.info(f"satrting generation")
+        from new_utils import generate_image
         try:
-            async for img in api.high_level.generate_image(prompt, ImageModel.Anime_v3, preset):
-                # img = api.high_level.generate_image(prompt, ImageModel.Anime_v3, preset)
-                # 如果你想要将图像保存到文件，请取消注释下面的行
-                # save_address.write_bytes(img) 
-                
-                # 将图像转换为base64编码的字符串
-                b64_str = base64.b64encode(img[1]).decode('utf-8')
-                #connection_count = connection_count - 1
-                logger.info(f"generation complete")
-                return b64_str
+            res_data = generate_image(prompt=prompt,negative_prompt=uc_str,resolution=preset.resolution)
+            b64_str = res_data["images"][0]
+            return b64_str
             
             # 可以在这里做一些操作，比如打印base64字符串或者将其传递给其他函数
                 
@@ -166,18 +160,7 @@ async def txt2img():
 
             break
     
-    # global last_request
     
-    # if last_request == None:
-    #     last_request = time.time()
-    
-    # time_diff = time.time() - last_request
-    # if time_diff < 3:
-    #     print(f"sleeping for {time_diff}")
-    #     time.sleep(time_diff)
-    
-    # time.sleep(1)
-    # 获取请求的 JSON 数据
     request_json = request.get_json()
 
     # 如果请求中没有 JSON 数据，返回错误响应

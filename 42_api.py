@@ -44,21 +44,21 @@ def forward():
         if 'prompt' in data :
             post_data['prompt'] =  preset['prompt'] + data['prompt']
 
-        if 'negative_prompt' in data :
-            post_data['negative_prompt'] = preset['negative_prompt']
+        # if 'negative_prompt' in data :
+        #     post_data['negative_prompt'] = preset['negative_prompt']
 
         print('--------- START OF REQUEST DATA ---------')
         print(json.dumps(post_data, indent=4))
         print('---------- END OF REQUEST DATA ----------')
 
-        url = f'http://192.168.1.6:7870/sdapi/v1/txt2img'
+        url = f'https://api.rryth.com:42421'
         print(f"URL for the request made to the server: {url}")
 
         req_id = datetime.now().strftime('%Y%m%d%H%M%S')
         with open(f'requests/{req_id}.json', 'w') as f:
                 json.dump(post_data, f)
 
-        response = requests.request(request.method, url, json=post_data, timeout=2000)
+        response = requests.request(request.method, url, json=post_data, timeout=2000,headers={'api': 'LCM' })
         connection_count = connection_count - 1 
         return response.content, response.status_code
 
