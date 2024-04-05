@@ -51,6 +51,8 @@ def txt2img():
         return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=[832,1216])
         lock.release()
         return return_data
+    finally:
+        lock.release()
     
 
 if __name__ == '__main__':

@@ -51,20 +51,32 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   post_data = requests.post(url="https://image.novelai.net/ai/generate-image",json=generate_template,headers=headers)
   
   data_byte:bytearray =  post_data.content
+  code = post_data.status_code
   
-  byte_stream = io.BytesIO(data_byte)
+  if code == 200:
+    try:
   
-  with zipfile.ZipFile(byte_stream, 'r') as zip_ref:
-    # 提取zip文件中的image_0.png
-    data = zip_ref.read('image_0.png')
+  
+      byte_stream = io.BytesIO(data_byte)
+      
+      with zipfile.ZipFile(byte_stream, 'r') as zip_ref:
+        # 提取zip文件中的image_0.png
+        data = zip_ref.read('image_0.png')
+        
+      # with open("image.png","wb") as f:
+      #   f.write(data)
+        
+      b64_str = base64.b64encode(data)
+      b64_str = b64_str.decode('utf-8')
+      
+      return {"images":[b64_str]}
     
-  # with open("image.png","wb") as f:
-  #   f.write(data)
-    
-  b64_str = base64.b64encode(data)
-  b64_str = b64_str.decode('utf-8')
+    except:
+      return ConnectionError
   
-  return {"images":[b64_str]}
+  else:
+    return ConnectionError
+  
 
 
 async def async_generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -> dict["images:":list[str]]:
@@ -72,7 +84,7 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
   api = API()
   
   token = await login()
-  
+    
   headers = {'Authorization': f'Bearer {token}' }
   print(headers)
   
@@ -111,20 +123,28 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
   post_data = requests.post(url="https://image.novelai.net/ai/generate-image",json=generate_template,headers=headers)
   
   data_byte:bytearray =  post_data.content
+  code = post_data.status_code
   
-  byte_stream = io.BytesIO(data_byte)
+  if code == 200:
+    try:
   
-  with zipfile.ZipFile(byte_stream, 'r') as zip_ref:
-    # 提取zip文件中的image_0.png
-    data = zip_ref.read('image_0.png')
-    
-  # with open("image.png","wb") as f:
-  #   f.write(data)
-    
-  b64_str = base64.b64encode(data)
-  b64_str = b64_str.decode('utf-8')
-  
-  return {"images":[b64_str]}
+      byte_stream = io.BytesIO(data_byte)
+      
+      with zipfile.ZipFile(byte_stream, 'r') as zip_ref:
+        # 提取zip文件中的image_0.png
+        data = zip_ref.read('image_0.png')
+        
+      # with open("image.png","wb") as f:
+      #   f.write(data)
+        
+      b64_str = base64.b64encode(data)
+      b64_str = b64_str.decode('utf-8')
+      
+      return {"images":[b64_str]}
+    except:
+      return ConnectionError
+  else:
+    return ConnectionError
 
 if __name__ == "__main__":
   print(generate_image(prompt="1girl",negative_prompt="",resolution=[832,1216]))
