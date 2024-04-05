@@ -52,6 +52,8 @@ def txt2img():
         lock.release()
         
     finally:
+        logger.success("request finished")
+        print("")
         return return_data
     
 
