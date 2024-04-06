@@ -70,11 +70,11 @@ def txt2img():
     except:
         try:
             return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=resolution)
-            
+            is_error = False
         except:
             try:
                 return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=resolution)
-            
+                is_error = False
             except Exception:
                 logger.error(Exception)
                 is_error = True
