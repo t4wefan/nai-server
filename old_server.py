@@ -12,7 +12,6 @@ from novelai_api.ImagePreset import ImagePreset,ImageResolution,UCPreset,ImageMo
 from nai import *
 import time
 
-import random
 
 request_count = 0
 fallback_count = 0
@@ -76,6 +75,9 @@ async def generate(sample_prompt,preset_str,uc_str):
     
     preset.scale = 6.5
     preset.n_samples = 1
+    
+    
+    import random
     
     random_res = random.choice([1152,1216])
     

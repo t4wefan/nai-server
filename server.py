@@ -42,25 +42,50 @@ def txt2img():
     else:
         print("\033[32mSource: insider request \033[0m")
         
+        
+    import random
+    
+    random_res = random.choice([1152,1216])
+    
+    from fallback import check_potrait,check_square
+
+    if check_potrait(input_str=sample_prompt):
+        resolution = (832, random_res)
+        print("Size: potrait")
+    else:
+        if check_square(input_str=sample_prompt):
+            resolution = (1024,1024)
+            print("Size: square")
+        else:
+            resolution = (random_res, 832)
+            print("Size: landscape")
+            from fallback import process_string
+            sample_prompt = process_string(input_str=sample_prompt,remove_list=['landscape',])
+        
     try:
         # api_inst = API()
-        return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=[832,1216])
+        return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=resolution)
         lock.release()
         is_error = False
         
     except:
         try:
-            return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=[832,1216])
-            lock.release()
+            return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=resolution)
+            
         except:
-            lock.release()
-            is_error = True
+            try:
+                return_data = generate_image(prompt=sample_prompt,negative_prompt=uc_str,resolution=resolution)
+            
+            except Exception:
+                logger.error(Exception)
+                is_error = True
         
     finally:
         if is_error:
             return "error",500
         logger.success("request finished")
         print("")
+        lock.release()
         return return_data
     
 
