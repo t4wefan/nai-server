@@ -51,7 +51,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   try:
     post_data = requests.post(url="https://image.novelai.net/ai/generate-image",json=generate_template,headers=headers)
   except:
-    raise ConnectionError
+    raise ConnectionError("can not access novelai")
   
   data_byte:bytearray =  post_data.content
   code = post_data.status_code
@@ -75,10 +75,10 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
       return {"images":[b64_str]}
     
     except:
-      raise ConnectionError
+      raise ConnectionError("can not process data")
   
   else:
-    raise ConnectionError
+    raise ConnectionError("error occured")
   
 
 
