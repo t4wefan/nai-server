@@ -81,6 +81,7 @@ def txt2img():
         
     finally:
         if is_error:
+            lock.release()
             return "error",500
         logger.success("request finished")
         print("")
