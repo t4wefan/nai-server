@@ -49,7 +49,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   print("posting data")
 
   try:
-    post_data = requests.post(url="https://image.novelai.net/ai/generate-image",json=generate_template,headers=headers)
+    post_data = requests.post(url="https://image.novelai.net/ai/generate-image",json=generate_template,headers=headers,timeout=30)
   except:
     raise ConnectionError("can not access novelai")
   
