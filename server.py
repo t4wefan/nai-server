@@ -11,9 +11,7 @@ lock = threading.Lock()
 
 @app.route('/sdapi/v1/txt2img', methods=['POST'])
 def txt2img():
-    logger.info("new request received")
-    lock.acquire()
-    logger.info("generating image")
+    # logger.info("new request received")
     
     request_json = request.get_json()
 
@@ -35,13 +33,20 @@ def txt2img():
     uc_str = n_prompt + "weibo_username" 
 
     
+    if "enable_hr" in data_dict:
+        print("\033[33mreceived a new outsider request \033[0m")
+    else:
+        print("\033[32mreceived a new insider request \033[0m")
+        
+    lock.acquire()
+    logger.info("starting generation")
+    
     print(data_dict)
     
     if "enable_hr" in data_dict:
-        print("\033[33mSource: outsider request \033[0m")
+        print("\033[33moutsider request \033[0m")
     else:
-        print("\033[32mSource: insider request \033[0m")
-        
+        print("\033[32minsider request \033[0m")
         
     import random
     
