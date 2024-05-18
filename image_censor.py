@@ -37,7 +37,7 @@ def is_nsfw(img_b64: str):
         "raw_result": response
     }
     
-    if response["porn"] > 0.7 or response["hentai"] > 0.7:
+    if response["porn"] > 0.7 or response["hentai"] > 0.8:
         result["is_nsfw"] = True
     
     end_time = time.time()  # Record the end time
