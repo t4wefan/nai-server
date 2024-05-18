@@ -51,11 +51,12 @@ def forward():
 
         response = requests.request(request.method, url, json=post_data, timeout=2000)
                 
-        result_dict = classify_pipeline(response.json())
+        
         
         end_time = time.time()
         print(f"total request time: {end_time-start_time}")
         if response.status_code == 200:
+            result_dict = classify_pipeline(response.json())
             return result_dict, response.status_code
         else:
             return response.content, response.status_code
