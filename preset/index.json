@@ -1,0 +1,15 @@
+{
+    "sampler_index": "Euler",
+    "restore_faces": false,
+    "enable_hr": true,
+    "prompt": "",
+    "batch_size": 1,
+    "seed": 3951905765,
+    "negative_prompt": "missing leg, fog, (close up:1.2), (huge head:1.2), (nsfw:1.4), butt, ((easynegative)), ((bad-hands-5)), (worst quality, low quality:1.4), lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name lowres, missing fngers, extra digt, wort quality, blurry, bad feet, bad hand, fingers more than 5, fingers less than 5, arms more than 2, legs more than 2, fingers less than 5zombie",
+    "cfg_scale": 8,
+    "steps": 20,
+    "width": 460,
+    "height": 640,
+    "denoising_strength": 0.6,
+    "original_path": "/sdapi/v1/txt2img"
+}
