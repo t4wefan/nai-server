@@ -48,7 +48,7 @@ def is_nsfw(img_b64: str):
     return result
 
 
-def apply_gaussian_blur(base64_str: str, radius=30):
+def apply_gaussian_blur(base64_str: str, radius=20):
     # 解码base64字符串为字节
     image_data = base64.b64decode(base64_str)
     
