@@ -71,7 +71,7 @@ def apply_gaussian_blur(base64_str: str, radius=30):
 def classify_pipeline(response: dict):
     image_b64 = response["images"][0]
     nsfw_status:dict = is_nsfw(image_b64)
-    
+    print(nsfw_status)
     if nsfw_status["is_nsfw"]:
         image_b64 = apply_gaussian_blur(image_b64)
     

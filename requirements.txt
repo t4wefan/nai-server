@@ -5,3 +5,4 @@ flask[async]
 asyncio
 loguru
 python-dotenv
+pillow
