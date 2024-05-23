@@ -6,7 +6,7 @@ from datetime import datetime
 
 import time
 
-from image_censor import is_nsfw,classify_pipeline_2
+from image_censor import is_nsfw,classify_pipeline_2,classify_pipeline
 
 app = Flask(__name__)
 os.makedirs('requests', exist_ok=True)
@@ -54,7 +54,7 @@ def forward():
         end_time = time.time()
         print(f"total request time: {end_time-start_time}")
         if response.status_code == 200:
-            result_dict = classify_pipeline_2(response.json())
+            result_dict = classify_pipeline(response.json())
             return result_dict, response.status_code
         else:
             return response.content, response.status_code
