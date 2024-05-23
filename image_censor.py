@@ -63,7 +63,7 @@ def is_nsfw_2(img_b64: str):
     files = {'image': img_b64}
     
     # Send a POST request
-    response = requests.post(safety_checker,data=files)
+    response = requests.post(safety_checker,json=files)
     
     response = response.json()
     

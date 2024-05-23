@@ -52,7 +52,6 @@ def forward():
         response = requests.request(request.method, url, json=post_data, timeout=2000)
                 
         
-        
         end_time = time.time()
         print(f"total request time: {end_time-start_time}")
         if response.status_code == 200:
