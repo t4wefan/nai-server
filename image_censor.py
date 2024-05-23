@@ -13,6 +13,8 @@ img_url_base = "http://192.168.1.16:8097/temp"
 
 classify_server = "http://192.168.1.43:3000/classify"
 
+safety_checker = "http://192.168.1.43:51317/check_safety"
+
 
 def is_nsfw(img_b64: str):
     start_time = time.time()  # Record the start time
@@ -47,6 +49,41 @@ def is_nsfw(img_b64: str):
     
     return result
 
+def is_nsfw_2(img_b64: str):
+    start_time = time.time()  # Record the start time
+    
+    # Decode the Base64 string into binary data
+    # image_data = base64.b64decode(img_b64)
+    
+    # Store the binary data in a BytesIO object
+    # image_file = io.BytesIO(image_data)
+    # image_file.name = 'image.png'  # Set the file name
+    
+    # Create a multipart/form-data dictionary
+    files = {'image': img_b64}
+    
+    # Send a POST request
+    response = requests.post(safety_checker,data=files)
+    
+    response = response.json()
+    
+    result = {
+        "is_nsfw": False,
+        "raw_result": response
+    }
+    
+    for i in response["concept_scores"]:
+        if i > 0.017:
+            result["is_nsfw"]=True
+            break
+        
+    end_time = time.time()  # Record the end time
+    elapsed_time = end_time - start_time  # Calculate elapsed time
+    
+    print(f"classify time: {elapsed_time:.2f}")  # Print execution time in English
+    
+    return result
+
 
 def apply_gaussian_blur(base64_str: str, radius=20):
     # 解码base64字符串为字节
@@ -71,6 +108,18 @@ def apply_gaussian_blur(base64_str: str, radius=20):
 def classify_pipeline(response: dict):
     image_b64 = response["images"][0]
     nsfw_status:dict = is_nsfw(image_b64)
+    print(nsfw_status)
+    if nsfw_status["is_nsfw"]:
+        image_b64 = apply_gaussian_blur(image_b64)
+    
+    result_dict = response
+    result_dict["images"][0] = image_b64
+    result_dict["censor"] = nsfw_status
+    return result_dict
+
+def classify_pipeline_2(response: dict):
+    image_b64 = response["images"][0]
+    nsfw_status:dict = is_nsfw_2(image_b64)
     print(nsfw_status)
     if nsfw_status["is_nsfw"]:
         image_b64 = apply_gaussian_blur(image_b64)
