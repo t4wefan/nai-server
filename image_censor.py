@@ -73,7 +73,7 @@ def is_nsfw_2(img_b64: str):
     }
     
     for i in response["concept_scores"]:
-        if i > 0.017:
+        if i > 0.019:
             result["is_nsfw"]=True
             break
         
