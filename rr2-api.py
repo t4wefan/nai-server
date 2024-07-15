@@ -28,7 +28,7 @@ def forward():
         with open('preset/index.json') as f:
             preset = json.load(f)
 
-        post_data:dict = {"source":"outsider", "enable_hr":True}
+        post_data:dict = {"source":"outsider", "enable_hr":False,"steps":20}
         
         if 'prompt' in data :
             post_data['prompt'] =  preset['prompt'] + data['prompt']
