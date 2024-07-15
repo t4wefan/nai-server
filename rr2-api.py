@@ -23,12 +23,12 @@ def forward():
 
         if not os.path.exists('preset/index.json'):
             with open('preset/index.json', 'w') as f:
-                json.dump({'prompt': '', 'negative_prompt': '', 'steps': '', 'width': '', 'height': '', 'batch_size': 1, 'sampler_index': 'Euler'}, f)
+                json.dump({'prompt': '<lora:jimaXLANI31lokrV43P1:1>', 'negative_prompt': '', 'steps': '', 'width': 832, 'height': 1216, 'batch_size': 1, 'sampler_index': 'Euler'}, f)
 
         with open('preset/index.json') as f:
             preset = json.load(f)
 
-        post_data:dict = {"source":"outsider", "enable_hr":False,"steps":20}
+        post_data:dict = {"source":"outsider", "enable_hr":False,"steps":20,'width': preset["width"], 'height': preset["height"]}
         
         if 'prompt' in data :
             post_data['prompt'] =  preset['prompt'] + data['prompt']
