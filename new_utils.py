@@ -13,7 +13,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   
   api = API()
   
-  headers = {'Authorization': f'Bearer {sync_login()}' }
+  headers = {'Authorization': f'Bearer {sync_login()}',"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" }
   # print(headers)
   
   seed:int = random.randint(11111111,99999999)
@@ -27,7 +27,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
             "width": 832,
             "height": 1216,
             "scale": 5,
-            "sampler": "k_euler",
+            "sampler": "k_euler_ancestral",
             "steps": 28,
             "n_samples": 1,
             "ucPreset": 0,
@@ -50,10 +50,9 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
     }  
 
 
-
-
-
   print("posting data")
+  
+  print(generate_template)
 
   try:
     post_data = requests.post(url="https://image.novelai.net/ai/generate-image",json=generate_template,headers=headers,timeout=120)
@@ -65,8 +64,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   
   if code == 200:
     try:
-  
-  
+    
       byte_stream = io.BytesIO(data_byte)
       
       with zipfile.ZipFile(byte_stream, 'r') as zip_ref:
@@ -109,7 +107,7 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
             "width": 832,
             "height": 1216,
             "scale": 5,
-            "sampler": "k_euler",
+            "sampler": "k_euler_ancestral",
             "steps": 28,
             "n_samples": 1,
             "ucPreset": 0,

@@ -1,0 +1,32 @@
+authorization:
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImxTcDFCcFVUTFR0Q2J0RFRoQnBBayIsIm5jIjoiV002SmplclFIRlUxRXRDNlJnZ0RVIiwiaWF0IjoxNzIyNDEwODU2LCJleHAiOjE3MjUwMDI4NTZ9.ckZF_n8_UXl8E_qsJSjp6ebL2h-sS9eKllnbyYXbulA
+content-length:
+959
+content-type:
+application/json
+dnt:
+1
+origin:
+https://novelai.net
+priority:
+u=1, i
+referer:
+https://novelai.net/
+sec-ch-ua:
+"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"
+sec-ch-ua-mobile:
+?0
+sec-ch-ua-platform:
+"Windows"
+sec-fetch-dest:
+empty
+sec-fetch-mode:
+cors
+sec-fetch-site:
+same-site
+user-agent:
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
+x-correlation-id:
+j84m9F
+x-initiated-at:
+2024-07-31T14:12:46.053Z
