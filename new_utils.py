@@ -30,6 +30,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
       "uncond_scale": 1.0,
       "controlnet_strength": 1.0,
       "add_original_image": False,
+      "legacy_v3_extend":False,
       "cfg_rescale": 0.0,
       "noise_schedule": "native",
       "width": resolution[0],
