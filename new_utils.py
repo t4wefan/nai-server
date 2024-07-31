@@ -26,7 +26,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
       "legacy": False,
       "n_samples": 1,
       "steps": 28,
-      "scale": 6.5,
+      "scale": 5,
       "uncond_scale": 1.0,
       "controlnet_strength": 1.0,
       "add_original_image": False,
@@ -43,7 +43,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
       "sm_dyn": False,
       "dynamic_thresholding": True,
       "qualityToggle": True,
-      "ucPreset": 4
+      "ucPreset": 0
     }
   }
   
