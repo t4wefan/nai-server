@@ -19,34 +19,40 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
   seed:int = random.randint(11111111,99999999)
   
   generate_template = {
-    "input": f"{prompt}, best quality, amazing quality, very aesthetic, absurdres",
-    "model": "nai-diffusion-3",
-    "action": "generate",
-    "parameters": {
-      "legacy": False,
-      "n_samples": 1,
-      "steps": 28,
-      "scale": 5,
-      "uncond_scale": 1.0,
-      "controlnet_strength": 1.0,
-      "add_original_image": False,
-      "legacy_v3_extend":False,
-      "cfg_rescale": 0.0,
-      "noise_schedule": "native",
-      "width": resolution[0],
-      "height": resolution[1],
-      "seed": seed,
-      "extra_noise_seed": seed,
-      "negative_prompt": f"{negative_prompt},nsfw, lowres, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], weibo_username",
-      "sampler": "k_euler",
-      "sm": False,
-      "sm_dyn": False,
-      "dynamic_thresholding": True,
-      "qualityToggle": True,
-      "ucPreset": 0
-    }
-  }
-  
+        "input": f"{prompt},best quality, amazing quality, very aesthetic, absurdres",
+        "model": "nai-diffusion-3",
+        "action": "generate",
+        "parameters": {
+            "params_version": 1,
+            "width": 832,
+            "height": 1216,
+            "scale": 5,
+            "sampler": "k_euler",
+            "steps": 28,
+            "n_samples": 1,
+            "ucPreset": 0,
+            "qualityToggle": True,
+            "sm": False,
+            "sm_dyn": False,
+            "dynamic_thresholding": False,
+            "controlnet_strength": 1,
+            "legacy": False,
+            "add_original_image": True,
+            "cfg_rescale": 0,
+            "noise_schedule": "native",
+            "legacy_v3_extend": False,
+            "seed": 2433197839,
+            "negative_prompt": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]",
+            "reference_image_multiple": [],
+            "reference_information_extracted_multiple": [],
+            "reference_strength_multiple": []
+        }
+    }  
+
+
+
+
+
   print("posting data")
 
   try:
@@ -95,32 +101,35 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
   seed:int = random.randint(11111111,99999999)
   
   generate_template = {
-    "input": f"{prompt}, best quality, amazing quality, very aesthetic, absurdres",
-    "model": "nai-diffusion-3",
-    "action": "generate",
-    "parameters": {
-      "legacy": False,
-      "n_samples": 1,
-      "steps": 28,
-      "scale": 6.5,
-      "uncond_scale": 1.0,
-      "controlnet_strength": 1.0,
-      "add_original_image": False,
-      "cfg_rescale": 0.0,
-      "noise_schedule": "native",
-      "width": resolution[0],
-      "height": resolution[1],
-      "seed": seed,
-      "extra_noise_seed": seed,
-      "negative_prompt": f"{negative_prompt},nsfw, lowres, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], weibo_username",
-      "sampler": "k_euler",
-      "sm": True,
-      "sm_dyn": False,
-      "dynamic_thresholding": True,
-      "qualityToggle": True,
-      "ucPreset": 4
-    }
-  }
+        "input": f"{prompt},best quality, amazing quality, very aesthetic, absurdres",
+        "model": "nai-diffusion-3",
+        "action": "generate",
+        "parameters": {
+            "params_version": 1,
+            "width": 832,
+            "height": 1216,
+            "scale": 5,
+            "sampler": "k_euler",
+            "steps": 28,
+            "n_samples": 1,
+            "ucPreset": 0,
+            "qualityToggle": True,
+            "sm": False,
+            "sm_dyn": False,
+            "dynamic_thresholding": False,
+            "controlnet_strength": 1,
+            "legacy": False,
+            "add_original_image": True,
+            "cfg_rescale": 0,
+            "noise_schedule": "native",
+            "legacy_v3_extend": False,
+            "seed": 2433197839,
+            "negative_prompt": "nsfw, lowres, {bad}, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]",
+            "reference_image_multiple": [],
+            "reference_information_extracted_multiple": [],
+            "reference_strength_multiple": []
+        }
+    }  
   
   print("posting data")
   
