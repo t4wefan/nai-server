@@ -112,7 +112,7 @@ async def async_generate_image(prompt: str,negative_prompt: str,resolution: list
       "seed": seed,
       "extra_noise_seed": seed,
       "negative_prompt": f"{negative_prompt},nsfw, lowres, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], weibo_username",
-      "sampler": "k_dpmpp_2s_ancestral",
+      "sampler": "k_euler",
       "sm": True,
       "sm_dyn": False,
       "dynamic_thresholding": True,
