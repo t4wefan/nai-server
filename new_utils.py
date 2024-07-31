@@ -38,7 +38,7 @@ def generate_image(prompt: str,negative_prompt: str,resolution: list[int,int]) -
       "extra_noise_seed": seed,
       "negative_prompt": f"{negative_prompt},nsfw, lowres, error, fewer, extra, missing, worst quality, jpeg artifacts, bad quality, watermark, unfinished, displeasing, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract], weibo_username",
       "sampler": "k_euler",
-      "sm": True,
+      "sm": False,
       "sm_dyn": False,
       "dynamic_thresholding": True,
       "qualityToggle": True,
