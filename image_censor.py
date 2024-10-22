@@ -6,7 +6,7 @@ import base64
 import io
 
 from PIL import Image, ImageFilter
-
+from datetime import datetime
 
 
 img_url_base = "http://192.168.1.16:8097/temp"
@@ -14,6 +14,21 @@ img_url_base = "http://192.168.1.16:8097/temp"
 classify_server = "http://192.168.1.43:3000/classify"
 
 safety_checker = "http://192.168.1.43:51317/check_safety"
+
+
+def save_base64_image(base64_str):
+    # 解码base64字符串
+    image_data = base64.b64decode(base64_str)
+    
+    # 获取当前时间，格式为：年-月-日_时-分-秒
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")[:-3]
+    
+    # 定义文件名和路径
+    file_name = f"{current_time}.png"
+    
+    # 将解码后的数据写入文件
+    with open(f"images/{file_name}", "wb") as file:
+        file.write(image_data)
 
 
 def is_nsfw(img_b64: str):
@@ -107,6 +122,7 @@ def apply_gaussian_blur(base64_str: str, radius=20):
 
 def classify_pipeline(response: dict):
     image_b64 = response["images"][0]
+    save_base64_image(image_b64)
     nsfw_status:dict = is_nsfw(image_b64)
     print(nsfw_status)
     if nsfw_status["is_nsfw"]:
